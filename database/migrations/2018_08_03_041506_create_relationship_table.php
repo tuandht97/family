@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateListNodesTable extends Migration
+class CreateRelationshipTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,23 @@ class CreateListNodesTable extends Migration
      */
     public function up()
     {
-        Schema::create('listNodes', function (Blueprint $table) {
+        Schema::create('relationship', function (Blueprint $table) {
             $table->increments('id');
 
-            //ID tree
-            $table->unsignedInteger('idTree');
-            $table->foreign('idTree')
-                  ->references('id')->on('trees')
-                  ->onDelete('cascade');
-
-            //ID node
-            $table->unsignedInteger('idNode');
-            $table->foreign('idNode')
+            //From ID node
+            $table->unsignedInteger('fromNode');
+            $table->foreign('fromNode')
                   ->references('id')->on('nodes')
                   ->onDelete('cascade');
 
-            $table->integer('level');
+            //To ID node
+            $table->unsignedInteger('toNode');
+            $table->foreign('toNode')
+                  ->references('id')->on('nodes')
+                  ->onDelete('cascade');
+
+            $table->tinyInteger('type');
+
             $table->timestamps();
         });
     }
@@ -40,6 +41,6 @@ class CreateListNodesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('listNodes');
+        Schema::dropIfExists('relationship');
     }
 }

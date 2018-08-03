@@ -37,9 +37,6 @@ class CreateTreesTable extends Migration
                   ->references('id')->on('users')
                   ->onDelete('cascade');
 
-            //danh sách node
-            
-
             $table->timestamps();
         });
     }
