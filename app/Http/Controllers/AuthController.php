@@ -6,6 +6,8 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Laravolt\Avatar\Facade as Avatar;
 
 class AuthController extends Controller
 {
@@ -28,9 +30,15 @@ class AuthController extends Controller
         $user = new User([
             'fullname' => $request->fullname,
             'email' => $request->email,
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->password),
+            'avatar' => 'avatar.png'
         ]);
         $user->save();
+
+        $avatar = Avatar::create($user->name)->getImageObject()->encode('png');
+        
+        Storage::put('avatars/'.$user->id.'/avatar.png', (string) $avatar);
+
         return response()->json([
             'message' => 'Successfully created user!'
         ], 201);
