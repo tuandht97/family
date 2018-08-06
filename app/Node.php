@@ -11,6 +11,6 @@ class Node extends Model
 
     public function tree()
     {
-        return $this->belongsTo('App\Tree');
+        return $this->belongsTo('App\Tree', 'idTree');
     }
 }

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
+use App\Http\Resources\UserResource;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Laravolt\Avatar\Facade as Avatar;
@@ -20,13 +23,8 @@ class AuthController extends Controller
      * @param  [string] password_confirmation
      * @return [string] message
      */
-    public function signup(Request $request)
+    public function signup(UserRequest $request)
     {
-        $request->validate([
-            'fullname' => 'required|string',
-            'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|confirmed'
-        ]);
         $user = new User([
             'fullname' => $request->fullname,
             'email' => $request->email,
@@ -102,5 +100,19 @@ class AuthController extends Controller
     public function user(Request $request)
     {
         return response()->json($request->user());
+    }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'fullname' => 'required|string'
+        ]);
+
+        $user = $request->user();
+        //dd($user);
+        $user->update($request->all());
+        return response([
+            'data' => new UserResource($user)
+        ],Response::HTTP_CREATED);
     }
 }
