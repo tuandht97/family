@@ -11,6 +11,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;
 
+
+    protected $table = 'users';
     /**
      * The attributes that are mass assignable.
      *
@@ -34,5 +36,10 @@ class User extends Authenticatable
     public function getAvatarUrlAttribute()
     {
         return Storage::url('avatars/'.$this->id.'/'.$this->avatar);
+    }
+
+    public function trees()
+    {
+        return $this->hasMany('App\Tree');
     }
 }
