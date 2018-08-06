@@ -16,17 +16,17 @@ class CreateTreesTable extends Migration
         Schema::create('trees', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->text('desciption');
-            $table->integer('amount');
+            $table->text('desciption')->nullable();
+            $table->integer('amount')->nullable();
 
             // cụ tổ
-            $table->unsignedInteger('ancestor');
+            $table->unsignedInteger('ancestor')->nullable();
             $table->foreign('ancestor')
                   ->references('id')->on('nodes')
                   ->onDelete('cascade');
 
             //trưởng họ
-            $table->unsignedInteger('patriarch');
+            $table->unsignedInteger('patriarch')->nullable();
             $table->foreign('patriarch')
                   ->references('id')->on('nodes')
                   ->onDelete('cascade');

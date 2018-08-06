@@ -17,17 +17,17 @@ class CreateNodesTable extends Migration
             $table->increments('id');
             $table->string('fullname');
             $table->string('image');
-            $table->string('email');
-            $table->string('phone',11);
-            $table->boolean('sex');
-            $table->date('birthday');
-            $table->string('birthplace');
-            $table->boolean('is_alive');
-            $table->string('address');
-            $table->date('death_date');
-            $table->text('cause_of_death');
-            $table->string('burial_place');
-            $table->text('biography');
+            $table->string('email')->nullable();
+            $table->string('phone',11)->nullable();
+            $table->boolean('sex')->nullable();
+            $table->date('birthday')->nullable();
+            $table->string('birthplace')->nullable();
+            $table->boolean('is_alive')->nullable();
+            $table->string('address')->nullable();
+            $table->date('death_date')->nullable();
+            $table->text('cause_of_death')->nullable();
+            $table->string('burial_place')->nullable();
+            $table->text('biography')->nullable();
             $table->timestamps();
         });
     }

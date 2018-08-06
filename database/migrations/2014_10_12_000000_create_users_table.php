@@ -21,9 +21,9 @@ class CreateUsersTable extends Migration
             $table->string('avatar')->default('avatar.png');
             $table->tinyInteger('auth');
             $table->boolean('sex');
-            $table->string('phone',11);
-            $table->date('birthday');
-            $table->string('address');
+            $table->string('phone',11)->nullable();
+            $table->date('birthday')->nullable();
+            $table->string('address')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
