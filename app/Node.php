@@ -19,4 +19,9 @@ class Node extends Model
     {
         return $this->belongsTo('App\Tree', 'idTree');
     }
+
+    public function relationships()
+    {
+        return $this->hasMany('App\Relationship');
+    }
 }

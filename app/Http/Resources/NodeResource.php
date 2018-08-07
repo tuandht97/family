@@ -27,7 +27,7 @@ class NodeResource extends JsonResource
             'is_alive' => $this->is_alive, 
             'address' => $this->address, 
             'death_date' => $this->death_date, 
-            'cause_of_date' => $this->cause_of_date, 
+            'cause_of_death' => $this->cause_of_date, 
             'burial_place' => $this->burial_place, 
             'biography' => $this->biography, 
             'father' => is_null($this->idFather) ? null : User::findOrFail($this->idFather)->fullname, 

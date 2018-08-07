@@ -64,7 +64,7 @@ class TreeController extends Controller
         //dd($node);
         $node->save();
 
-        
+
         return response([
             'tree' => new TreeResource($tree),
             'node' => new NodeResource($node),
